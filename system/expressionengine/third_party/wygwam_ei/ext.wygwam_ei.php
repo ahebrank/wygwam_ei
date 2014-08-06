@@ -15,6 +15,7 @@ class Wygwam_ei_ext {
         'lineutils',
         'image2'
     );
+    private $js_added = false;
 
     private $_hooks = array(
         'wygwam_config',
@@ -22,7 +23,7 @@ class Wygwam_ei_ext {
 
     private function _include_resources() {
         // Is this the first time we've been called?
-        if (!self::$_included_resources)
+        if (!$this->js_added)
         {
             // Tell CKEditor where to find our plugin
             foreach ($this->plugins as $p) {
@@ -30,7 +31,7 @@ class Wygwam_ei_ext {
                 $this->EE->cp->add_to_foot('<script type="text/javascript">CKEDITOR.plugins.addExternal('.$p.', "'.$plugin_url.'");</script>');
             }
             // Don't do that again
-            self::$_included_resources = TRUE;
+            $this->js_added = true;
         }
     }
 
