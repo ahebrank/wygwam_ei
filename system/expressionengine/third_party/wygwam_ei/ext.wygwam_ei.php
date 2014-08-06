@@ -1,7 +1,7 @@
 <?php if (! defined('BASEPATH')) exit('No direct script access allowed');
 
 // based on http://docs.pixelandtonic.com/wygwam/developers/ckeditor_plugins.html
-class Wygwam_ei {
+class Wygwam_ei_ext {
     var $name           = 'Wygwam EI';
     var $version        = '0.1';
     var $description    = '';
