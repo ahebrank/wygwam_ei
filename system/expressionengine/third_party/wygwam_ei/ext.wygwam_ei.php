@@ -34,7 +34,7 @@ class Wygwam_ei_ext {
         }
     }
 
-    public function Wygwam_ei() {
+    public function __construct() {
         $this->EE =& get_instance();
     }
 
