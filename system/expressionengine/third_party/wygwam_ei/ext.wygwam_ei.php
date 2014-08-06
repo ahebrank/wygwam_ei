@@ -28,7 +28,7 @@ class Wygwam_ei_ext {
             // Tell CKEditor where to find our plugin
             foreach ($this->plugins as $p) {
                 $plugin_url = URL_THIRD_THEMES.$this->realname.'/'.$p;
-                $this->EE->cp->add_to_foot('<script type="text/javascript">CKEDITOR.plugins.addExternal('.$p.', "'.$plugin_url.'");</script>');
+                $this->EE->cp->add_to_foot('<script type="text/javascript">CKEDITOR.plugins.addExternal("'.$p.'", "'.$plugin_url.'");</script>');
             }
             // Don't do that again
             $this->js_added = true;
