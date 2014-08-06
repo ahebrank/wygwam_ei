@@ -15,10 +15,13 @@ class Wygwam_ei_ext {
         'lineutils',
         'image2'
     );
+    private $plugins_with_icons = array(
+        'image2');
     private $js_added = false;
 
     private $_hooks = array(
         'wygwam_config',
+        'wygwam_tb_groups',
     );
 
     private function _include_resources() {
@@ -61,6 +64,9 @@ class Wygwam_ei_ext {
         $this->EE->db->where('class', get_class($this))->delete('extensions');
     }
 
+
+    // hooks
+
     public function wygwam_config($config, $settings) {
         if (($last_call = $this->EE->extensions->last_call) !== FALSE) {
             $config = $last_call;
@@ -74,4 +80,25 @@ class Wygwam_ei_ext {
 
         return $config;
     }
+
+    public function wygwam_tb_groups($tb_groups) {
+        if (($last_call = $this->EE->extensions->last_call) !== FALSE) {
+            $tb_groups = $last_call;
+        }
+
+        $tb_groups[] = $this->plugins_with_icons;
+
+        // Is this the toolbar editor?
+        if ($this->EE->input->get('M') == 'show_module_cp')
+        {
+            foreach ($this->plugins_with_icons as $p) {
+                // Give our toolbar button an icon
+                $icon_url = URL_THIRD_THEMES.$this->realname.'/'.$p.'/icons/image.png';
+                $this->EE->cp->add_to_head('<style type="text/css">.cke_button__'.$p.'_icon { background-image: url('.$icon_url.'); }</style>');
+            }
+        }
+
+        return $tb_groups;
+    }
+
 }
